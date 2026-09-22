@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="Device">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Modbus" type="ModbusDeviceType"/>
+                <xs:element name="KNX" type="KNXDeviceType"/>
+                <xs:element name="DI" type="DICellType"/>
+                <xs:element name="DO" type="DOCellType"/>
+                <xs:element name="RF" type="RFCellType"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Modbus -->
+
+    <xs:complexType name="ModbusDeviceType">
+        <xs:all>
+            <xs:element name="Ventilation" type="ModbusCellType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ModbusCellType">
+        <xs:all>
+            <xs:element name="Cell" type="ModbusCellInfo"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ModbusCellInfo">
+        <xs:group ref="ModbusCellGroup"/>
+    </xs:complexType>
+
+    <xs:group name="ModbusCellGroup">
+        <xs:sequence>
+            <xs:element name="SharedLibrary" type="xs:string"/>
+            <xs:element name="ProductID" type="xs:string"/>
+            <xs:element name="Item">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="Cell" type="ModbusItemCell"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Switch" type="ModbusDataPointType"/>
+            <xs:element name="Speed" type="ModbusDataPointType"/>
+            <xs:element name="DeviceAddr" type="xs:integer"/>
+            <xs:element name="Port" type="xs:integer"/>
+            <xs:element name="Baudrate" type="xs:integer" default="9600"/>
+            <xs:element name="Databit" type="xs:integer" default="8"/>
+            <xs:element name="Parity" default="n">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="n"/>
+                        <xs:enumeration value="o"/>
+                        <xs:enumeration value="e"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Stopbit" type="xs:integer" default="1"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="ModbusDataPointType">
+        <xs:all>
+            <xs:element name="DataPoint" type="xs:integer"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="ModbusItemCell">
+        <xs:all>
+            <xs:element name="PrimaryKey" type="xs:integer"/>
+            <xs:element name="ForeignKey" type="xs:integer"/>
+            <xs:element name="ForeignType">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="KNX"/>
+                        <xs:enumeration value="ZIGBEE"/>
+                        <xs:enumeration value="MODBUS"/>
+                        <xs:enumeration value="RF433"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <!-- KNX -->
+    <xs:complexType name="KNXDeviceType">
+        <xs:all>
+            <xs:element name="AirCondition" type="KNXCellType"/>
+            <xs:element name="Ventilation" type="KNXCellType"/>
+            <xs:element name="FloorHeating" type="KNXCellType"/>
+            <xs:element name="Panel" type="KNXCellType"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="KNXCellType">
+        <xs:all>
+            <xs:element name="Cell" type="KNXCellInfo"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="KNXCellInfo">
+        <xs:group ref="KNXCellGroup"/>
+    </xs:complexType>
+
+    <xs:group name="KNXCellGroup">
+        <xs:sequence>
+            <xs:element name="SharedLibrary" type="xs:string"/>
+            <xs:element name="ProductID" type="xs:string"/>
+
+            <xs:element name="PhyAddr" type="xs:string"/>
+            <xs:element name="PrimaryKey" type="xs:integer"/>
+            <xs:element name="ForeignKey" type="xs:integer"/>
+            <xs:element name="ForeignType" type="xs:string"/>
+            <xs:element name="Switch" type="KNXDataType"/>
+            <xs:element name="Speed" type="KNXDataType"/>
+            <xs:element name="Mode" type="KNXDataType"/>
+            <xs:element name="Temp" type="KNXDataType"/>
+            <xs:element name="EnvTemp" type="KNXEnvDataType"/>
+            <xs:element name="channel" type="KNXChannelType"/>
+            <xs:element name="Parity" default="n">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="n"/>
+                        <xs:enumeration value="o"/>
+                        <xs:enumeration value="e"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Stopbit" type="xs:integer" default="1"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="KNXDataType">
+        <xs:sequence>
+            <xs:element name="Ctrl" type="xs:string"/>
+            <xs:element name="Status" type="xs:string"/>
+            <xs:element name="DataPoint" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KNXEnvDataType">
+        <xs:sequence>
+            <xs:element name="Temp" type="xs:string"/>
+            <xs:element name="DataPoint" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KNXChannelType">
+        <xs:sequence>
+            <xs:element name="Switch" type="xs:string"/>
+            <xs:element name="Status" type="xs:string"/>
+            <xs:element name="DataPoint" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--    DI-->
+    <xs:complexType name="DICellType">
+        <xs:all>
+            <xs:element name="Cell" type="DICellInfo"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="DICellInfo">
+        <xs:group ref="DICellGroup"/>
+    </xs:complexType>
+
+    <xs:group name="DICellGroup">
+        <xs:sequence>
+            <xs:element name="ProductID" type="xs:string"/>
+            <xs:element name="PrimaryKey" type="xs:integer"/>
+            <xs:element name="ForeignKey" type="xs:integer"/>
+            <xs:element name="ForeignType" type="xs:string"/>
+            <xs:element name="Channel">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:maxInclusive value="16"/>
+                        <xs:minInclusive value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Trigger">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="low"/>
+                        <xs:enumeration value="high"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="DataPoint" type="xs:integer"/>
+        </xs:sequence>
+    </xs:group>
+
+    <!-- Curtain -->
+    <xs:complexType name="CurtainCellType">
+        <xs:all>
+            <xs:element name="Cell" type="CurtainCellInfo"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="CurtainCellInfo">
+        <xs:group ref="CurtainCellGroup"/>
+    </xs:complexType>
+
+    <xs:group name="CurtainCellGroup">
+        <xs:sequence>
+            <xs:element name="ProductID" type="xs:string"/>
+            <xs:element name="PhyAddr" type="xs:string"/>
+            <xs:element name="Item" type="xs:integer"/>
+            <xs:element name="ForeignType" type="xs:string"/>
+            <xs:element name="channel" type="KNXChannelType"/>
+        </xs:sequence>
+    </xs:group>
+
+</xs:schema>

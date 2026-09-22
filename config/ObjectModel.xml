@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PrimaryKey和ForeignKey是设备id的用户输入部分，长度3个字节，可以是字母和数字组合，非Zigbee设备务必手动输入，同协议类型设备PrimaryKey务必唯一。 -->
+<!-- 没有ProductID的设备，不显示在涂鸦平台 -->
+<!-- 触发设备/输入设备通常不做为物模型设备，不显示在云平台、app，执行设备/输出设备作为物模型的组成部分 -->
+<!-- 485全双工模式必须独占一个端口 -->
+
+<Device>
+    <HouseType>125</HouseType>
+    <Zigbee module="disabled"/>
+    <Gateway>
+        <ProductID>qdhgdfnanotjumfv</ProductID>
+        <state>32</state>
+        <reset>34</reset>
+        <alarm>45</alarm>
+        <scene>101</scene>
+        <fault>104</fault>
+        <pos>199</pos>
+    </Gateway>
+
+        <Modbus>
+    <!--        <AirCondition>-->
+    <!--            <Cell>-->
+    <!--                <SharedLibrary>AirCondition-DaiKin-DTA116A621.so</SharedLibrary>-->
+    <!--                <ProductID>cl1ho1dimtvada4h</ProductID>-->
+    <!--                <Item>-->
+    <!--                    <Cell>-->
+    <!--                        <RoomNo>1</RoomNo>-->
+    <!--                        <PrimaryKey>100</PrimaryKey>-->
+    <!--                        <ForeignKey>100</ForeignKey>-->
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                    <Cell>-->
+    <!--                        <RoomNo>2</RoomNo>-->
+    <!--                        <PrimaryKey>101</PrimaryKey>-->
+    <!--                        <ForeignKey>101</ForeignKey>-->
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                    <Cell>-->
+    <!--                        <RoomNo>3</RoomNo>-->
+    <!--                        <PrimaryKey>102</PrimaryKey>-->
+    <!--                        <ForeignKey>102</ForeignKey>-->
+
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                    <Cell>-->
+    <!--                        <RoomNo>4</RoomNo>-->
+    <!--                        <PrimaryKey>103</PrimaryKey>-->
+    <!--                        <ForeignKey>103</ForeignKey>-->
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                    <Cell group="member">-->
+    <!--                        <RoomNo>5</RoomNo>-->
+    <!--                        <PrimaryKey>104</PrimaryKey>-->
+    <!--                        <ForeignKey>104</ForeignKey>-->
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                    <Cell group="member">-->
+    <!--                        <RoomNo>6</RoomNo>-->
+    <!--                        <PrimaryKey>104</PrimaryKey>-->
+    <!--                        <ForeignKey>104</ForeignKey>-->
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                </Item>-->
+    <!--                <Switch>-->
+    <!--                    <DataPoint>1</DataPoint>-->
+    <!--                </Switch>-->
+    <!--                <Speed>-->
+    <!--                    <DataPoint>5</DataPoint>-->
+    <!--                </Speed>-->
+    <!--                <Mode>-->
+    <!--                    <DataPoint>4</DataPoint>-->
+    <!--                </Mode>-->
+    <!--                <Temp>-->
+    <!--                    <DataPoint>2</DataPoint>-->
+    <!--                </Temp>-->
+    <!--                <EnvTemp>-->
+    <!--                    <DataPoint>3</DataPoint>-->
+    <!--                </EnvTemp>-->
+    <!--                <Fault>-->
+    <!--                    <DataPoint>101</DataPoint>-->
+    <!--                </Fault>-->
+
+    <!--                &lt;!&ndash;Modbus device id&ndash;&gt;-->
+    <!--                <DeviceAddr>1</DeviceAddr>-->
+    <!--                &lt;!&ndash;串口号,当前硬件支持1,2,3&ndash;&gt;-->
+    <!--                <Port>1</Port>-->
+    <!--                <Baudrate>9600</Baudrate>-->
+    <!--                <Databit>8</Databit>-->
+    <!--                &lt;!&ndash;n(无) o(奇) e(偶)&ndash;&gt;-->
+    <!--                <Parity>n</Parity>-->
+    <!--                <Stopbit>1</Stopbit>-->
+    <!--                &lt;!&ndash; RS485控制命令：应答Y，不应答N &ndash;&gt;-->
+    <!--                <Feedback>Y</Feedback>-->
+    <!--                &lt;!&ndash; 设备主动上报数据:Y &ndash;&gt;-->
+    <!--                <FullDuplex>N</FullDuplex>-->
+    <!--                &lt;!&ndash;数据应答延时，单位ms&ndash;&gt;-->
+    <!--                <Delay>20</Delay>-->
+    <!--            </Cell>-->
+    <!--        </AirCondition>-->
+    <!--        <Ventilation>-->
+    <!--            <Cell>-->
+    <!--                <SharedLibrary>Modbus_Ventilation_TuoLi_TLCAA301R.so</SharedLibrary>-->
+    <!--                <ProductID>ityiaeb3uzapmahe</ProductID>-->
+    <!--                <Item>-->
+    <!--                    <Cell>-->
+    <!--                        <PrimaryKey>100</PrimaryKey>-->
+    <!--                        <ForeignKey>200</ForeignKey>-->
+    <!--                        &lt;!&ndash; ZIGBEE/MODBUS/KNX/RF433 &ndash;&gt;-->
+    <!--                        <ForeignType>KNX</ForeignType>-->
+    <!--                    </Cell>-->
+    <!--                </Item>-->
+    <!--                <Switch>-->
+    <!--                    <DataPoint>39</DataPoint>-->
+    <!--                </Switch>-->
+    <!--                <Speed>-->
+    <!--                    <DataPoint>101</DataPoint>-->
+    <!--                </Speed>-->
+    <!--                &lt;!&ndash; Modbus device addr &ndash;&gt;-->
+    <!--                <DeviceAddr>1</DeviceAddr>-->
+    <!--                &lt;!&ndash; Up to three serial ports are supported &ndash;&gt;-->
+    <!--                <Port>1</Port>-->
+    <!--                <Baudrate>9600</Baudrate>-->
+    <!--                <Databit>8</Databit>-->
+    <!--                &lt;!&ndash; n(无) o(奇) e(偶) &ndash;&gt;-->
+    <!--                <Parity>n</Parity>-->
+    <!--                <Stopbit>1</Stopbit>-->
+    <!--                &lt;!&ndash; RS485控制命令：应答Y，不应答N &ndash;&gt;-->
+    <!--                <Feedback>Y</Feedback>-->
+    <!--                &lt;!&ndash;数据应答延时，单位ms&ndash;&gt;-->
+    <!--                <Delay>20</Delay>-->
+    <!--            </Cell>-->
+    <!--        </Ventilation>-->
+    <Curtain>
+        <Cell>
+            <!-- 窗帘默认关联KNX按键 -->
+            <SharedLibrary>Modbus_Ventilation_TuoLi_TLCAA301R.so</SharedLibrary>
+            <ProductID>aleeszi3hjcch9ae</ProductID>
+            <PrimaryKey>300</PrimaryKey>
+            <ForeignKey>400</ForeignKey>
+            <ForeignType>KNX</ForeignType>
+
+            <Switch>
+                <DataPoint>1</DataPoint>
+            </Switch>
+            <Fault>
+                <DataPoint>12</DataPoint>
+            </Fault>
+            <Direction>
+                <DataPoint>101</DataPoint>
+            </Direction>
+            <Position>
+                <DataPoint>199</DataPoint>
+            </Position>
+
+            <!-- Modbus device addr -->
+            <DeviceAddr>1</DeviceAddr>
+            <!-- Up to three serial ports are supported -->
+            <Port>1</Port>
+            <Baudrate>9600</Baudrate>
+            <Databit>8</Databit>
+            <!-- n(无) o(奇) e(偶) -->
+            <Parity>n</Parity>
+            <Stopbit>1</Stopbit>
+            <!-- RS485控制命令：应答Y，不应答N -->
+            <Feedback>N</Feedback>
+            <!--数据应答延时，单位ms-->
+            <Delay>20</Delay>
+        </Cell>
+    </Curtain>
+        </Modbus>
+    <KNX>
+        <!--        <AirCondition>-->
+        <!--            <Cell>-->
+        <!--                <SharedLibrary>knx_acd_panel.so</SharedLibrary>-->
+        <!--                <ProductID>cl1ho1dimtvada4h</ProductID>-->
+        <!--                <PhyAddr>1.1.1</PhyAddr>-->
+        <!--                <PrimaryKey>100</PrimaryKey>-->
+        <!--                <ForeignKey>1</ForeignKey>-->
+        <!--                <ForeignType>KNX</ForeignType>-->
+        <!--                <OnlineCheck>no</OnlineCheck>-->
+        <!--                &lt;!&ndash; controller / actuator &ndash;&gt;-->
+        <!--                <DeviceAttr>controller</DeviceAttr>-->
+        <!--                <Switch>-->
+        <!--                    <Ctrl>0/1/52</Ctrl>-->
+        <!--                    <Status>0/1/52</Status>-->
+        <!--                    <DataPoint>1</DataPoint>-->
+        <!--                </Switch>-->
+        <!--                <Speed>-->
+        <!--                    <Ctrl>0/1/47</Ctrl>-->
+        <!--                    <Status>0/1/46</Status>-->
+        <!--                    <DataPoint>5</DataPoint>-->
+        <!--                </Speed>-->
+        <!--                <Mode>-->
+        <!--                    <Ctrl>0/1/51</Ctrl>-->
+        <!--                    <Status>0/1/50</Status>-->
+        <!--                    <DataPoint>4</DataPoint>-->
+        <!--                </Mode>-->
+        <!--                <Temp>-->
+        <!--                    <Ctrl>0/1/49</Ctrl>-->
+        <!--                    <Status>0/1/48</Status>-->
+        <!--                    <DataPoint>2</DataPoint>-->
+        <!--                </Temp>-->
+        <!--                <EnvTemp>-->
+        <!--                    <Temp>0/1/45</Temp>-->
+        <!--                    <DataPoint>3</DataPoint>-->
+        <!--                </EnvTemp>-->
+        <!--                <Fault>-->
+        <!--                    <Ctrl>0/1/46</Ctrl>-->
+        <!--                    <DataPoint>101</DataPoint>-->
+        <!--                </Fault>-->
+        <!--                <lost>-->
+        <!--                    <Ctrl>0/1/46</Ctrl>-->
+        <!--                    <DataPoint>102</DataPoint>-->
+        <!--                </lost>-->
+        <!--            </Cell>-->
+        <!--        </AirCondition>-->
+
+        <!--        <Ventilation>-->
+        <!--            <Cell>-->
+        <!--                <SharedLibrary>knx_vent_panel.so</SharedLibrary>-->
+        <!--                <PhyAddr>1.1.1</PhyAddr>-->
+        <!--                <PrimaryKey>200</PrimaryKey>-->
+        <!--                <ForeignKey>100</ForeignKey>-->
+        <!--                <ForeignType>KNX</ForeignType>-->
+        <!--                <Switch>-->
+        <!--                    <Ctrl>0/1/59</Ctrl>-->
+        <!--                    <Status>0/1/59</Status>-->
+        <!--                    <DataPoint>39</DataPoint>-->
+        <!--                </Switch>-->
+        <!--                <Speed>-->
+        <!--                    <Ctrl>0/1/58</Ctrl>-->
+        <!--                    <Status>0/1/57</Status>-->
+        <!--                    <DataPoint>101</DataPoint>-->
+        <!--                </Speed>-->
+        <!--                <EnvTemp>-->
+        <!--                    <Temp>0/1/45</Temp>-->
+        <!--                    <DataPoint>3</DataPoint>-->
+        <!--                </EnvTemp>-->
+        <!--                <Fault>-->
+        <!--                    <Ctrl>0/1/46</Ctrl>-->
+        <!--                    <DataPoint>101</DataPoint>-->
+        <!--                </Fault>-->
+        <!--            </Cell>-->
+        <!--        </Ventilation>-->
+
+        <!--        <FloorHeating>-->
+        <!--            <Cell>-->
+        <!--                <SharedLibrary>knx_heat_panel.so</SharedLibrary>-->
+        <!--                <ProductID>gkgvfx8davsnyejo</ProductID>-->
+        <!--                <PhyAddr>1.1.1</PhyAddr>-->
+        <!--                <PrimaryKey>300</PrimaryKey>-->
+        <!--                <ForeignKey>1</ForeignKey>-->
+        <!--                <ForeignType>KNX</ForeignType>-->
+        <!--                <Switch>-->
+        <!--                    <Ctrl>0/1/55</Ctrl>-->
+        <!--                    <Status>0/1/55</Status>-->
+        <!--                    <DataPoint>1</DataPoint>-->
+        <!--                </Switch>-->
+        <!--                <Temp>-->
+        <!--                    <Ctrl>0/1/54</Ctrl>-->
+        <!--                    <Status>0/1/53</Status>-->
+        <!--                    <DataPoint>2</DataPoint>-->
+        <!--                </Temp>-->
+        <!--                <EnvTemp>-->
+        <!--                    <Temp>0/1/45</Temp>-->
+        <!--                    <DataPoint>3</DataPoint>-->
+        <!--                </EnvTemp>-->
+        <!--                <Fault>-->
+        <!--                    <Ctrl>0/1/46</Ctrl>-->
+        <!--                    <DataPoint>101</DataPoint>-->
+        <!--                </Fault>-->
+        <!--            </Cell>-->
+        <!--        </FloorHeating>-->
+
+        <Panel>
+            <Cell>
+                <ProductID>ycsntf5vjxh02ugs</ProductID>
+                <PhyAddr>1.1.2</PhyAddr>
+                <PrimaryKey>400</PrimaryKey>
+                <ForeignKey>1</ForeignKey>
+                <ForeignType>KNX</ForeignType>
+                <channel mode="wr">
+                    <Switch>1/1/1</Switch>
+                    <Status>1/2/1</Status>
+                    <DataPoint>1</DataPoint>
+                </channel>
+                <channel mode="wr">
+                    <Switch>1/1/2</Switch>
+                    <Status>1/2/2</Status>
+                    <DataPoint>2</DataPoint>
+                </channel>
+                <channel mode="wr">
+                    <Switch>1/1/3</Switch>
+                    <Status>1/2/3</Status>
+                    <DataPoint>3</DataPoint>
+                </channel>
+            </Cell>
+        </Panel>
+
+        <SmartPanel>
+            <Cell>
+                <PhyAddr>1.1.5</PhyAddr>
+                <PrimaryKey>400</PrimaryKey>
+                <ForeignKey>1</ForeignKey>
+                <ForeignType>KNX</ForeignType>
+                <channel>
+                    <switch>
+                        <Ctrl>1/1/1</Ctrl>
+                        <Status>1/0/1</Status>
+                        <DataPoint>103</DataPoint>
+                    </switch>
+                    <scene>
+                        <addr>1/1/1</addr>
+                        <value>1</value>
+                        <DataPoint>1</DataPoint>
+                    </scene>
+                    <mode>
+                        <select>switch</select>
+                        <DataPoint>102</DataPoint>
+                    </mode>
+                </channel>
+                <channel>
+                    <switch>
+                        <Ctrl>1/1/2</Ctrl>
+                        <Status>1/0/2</Status>
+                        <DataPoint>104</DataPoint>
+                    </switch>
+                    <scene>
+                        <addr>1/1/2</addr>
+                        <value>1</value>
+                        <DataPoint>2</DataPoint>
+                    </scene>
+                    <mode>
+                        <select>switch</select>
+                        <DataPoint>103</DataPoint>
+                    </mode>
+                </channel>
+                <channel>
+                    <switch>
+                        <Ctrl>1/1/3</Ctrl>
+                        <Status>1/0/3</Status>
+                        <DataPoint>105</DataPoint>
+                    </switch>
+                    <scene>
+                        <addr>1/1/3</addr>
+                        <value>1</value>
+                        <DataPoint>3</DataPoint>
+                    </scene>
+                    <mode>
+                        <select>scene</select>
+                        <DataPoint>104</DataPoint>
+                    </mode>
+                </channel>
+            </Cell>
+        </SmartPanel>
+
+        <ScenePanel>
+            <Cell>
+                <PhyAddr>1.1.5</PhyAddr>
+                <PrimaryKey>400</PrimaryKey>
+                <ForeignKey>1</ForeignKey>
+                <ForeignType>KNX</ForeignType>
+                <channel>
+                    <addr>1/1/1</addr>
+                    <value>1</value>
+                    <DataPoint>1</DataPoint>
+                </channel>
+                <channel>
+                    <addr>1/1/2</addr>
+                    <value>1</value>
+                    <DataPoint>2</DataPoint>
+                </channel>
+                <channel>
+                    <addr>1/1/3</addr>
+                    <value>1</value>
+                    <DataPoint>3</DataPoint>
+                </channel>
+            </Cell>
+        </ScenePanel>
+
+        <Dimmer>
+            <Cell>
+                <ProductID>gkgvfx8davsnyejo</ProductID>
+                <PhyAddr>1.1.5</PhyAddr>
+                <PrimaryKey>500</PrimaryKey>
+                <ForeignKey>1</ForeignKey>
+                <ForeignType>KNX</ForeignType>
+
+                <channel>
+                    <Switch>
+                        <Ctrl>1/1/1</Ctrl>
+                        <Status>1/0/1</Status>
+                        <DataPoint>1</DataPoint>
+                    </Switch>
+                    <Brightness max="1000" min="10" step="" scaling="">
+                        <Ctrl>1/1/1</Ctrl>
+                        <Status>1/0/1</Status>
+                        <DataPoint>2</DataPoint>
+                    </Brightness>
+                </channel>
+            </Cell>
+        </Dimmer>
+
+        <Curtain>
+            <Cell model="bool">
+                <ProductID>t0fjrurb</ProductID>
+                <PrimaryKey>300</PrimaryKey>
+                <ForeignKey>1</ForeignKey>
+                <ForeignType>KNX</ForeignType>
+                <control>
+                    <open value="1">1/0/5</open>
+                    <close value="0">1/0/5</close>
+                    <DataPoint>1</DataPoint>
+                </control>
+                <pause>
+                    <pause value="0">1/1/5</pause>
+                    <continue value="1">1/1/5</continue>
+                    <DataPoint>1</DataPoint>
+                </pause>
+
+                <reversal>101</reversal>
+                <position>199</position>
+            </Cell>
+        </Curtain>
+
+        <Do model="bool">
+            <Cell>
+                <ProductID>t0fjrurb</ProductID>
+                <DeviceAttr>actuator</DeviceAttr>
+                <DeviceID>300</DeviceID>
+
+                <control>
+                    <open value="1">1/0/5</open>
+                    <close value="0">1/0/5</close>
+                    <DataPoint>1</DataPoint>
+                </control>
+                <pause>
+                    <pause value="0">1/1/5</pause>
+                    <continue value="1">1/1/5</continue>
+                    <DataPoint>1</DataPoint>
+                </pause>
+
+            </Cell>
+        </Do>
+
+        <Scene>
+            <Cell>
+                <id>1</id>
+                <name>回家</name>
+                <addr>1/1/1</addr>
+                <value>1</value>
+            </Cell>
+        </Scene>
+    </KNX>
+
+    <DI>
+        <Cell>
+            <!-- device name:水浸 -->
+            <ProductID>1qyjgsx6nntxfqja</ProductID>
+            <PrimaryKey>100</PrimaryKey>
+            <ForeignKey>1</ForeignKey>
+            <ForeignType>KNX</ForeignType>
+            <!-- 1~16 -->
+            <Channel>1</Channel>
+            <!-- low/high -->
+            <Trigger>low</Trigger>
+            <DataPoint>1</DataPoint>
+        </Cell>
+        <Cell>
+            <!-- device name:烟雾 -->
+            <ProductID>zw9j8wgdg8mmpz59</ProductID>
+            <PrimaryKey>200</PrimaryKey>
+            <ForeignKey>1</ForeignKey>
+            <ForeignType>KNX</ForeignType>
+            <!-- 1~16 -->
+            <Channel>2</Channel>
+            <!-- low/high -->
+            <Trigger>low</Trigger>
+            <DataPoint>1</DataPoint>
+        </Cell>
+    </DI>
+
+    <Group>
+        <AirCondition>
+            <Cell type="485" member_sum="3">
+                <group_id>1</group_id>
+                <PrimaryKey>100</PrimaryKey>
+                <ForeignKey>101</ForeignKey>
+                <ForeignKey>102</ForeignKey>
+            </Cell>
+        </AirCondition>
+        <Curtain>
+            <Cell type="485" member_sum="3">
+                <group_id>2</group_id>
+                <PrimaryKey>100</PrimaryKey>
+                <ForeignKey>101</ForeignKey>
+                <ForeignKey>102</ForeignKey>
+            </Cell>
+        </Curtain>
+    </Group>
+</Device>
+

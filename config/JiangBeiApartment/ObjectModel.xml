@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Device>
+    <Modbus>
+        <AirCondition>
+            <Cell>
+                <SharedLibrary>Mbus_Acd_ZhongHong_RiLi.so</SharedLibrary>
+                <ProductID>iqkpbovlhaxkekh1</ProductID>
+
+                <Item>
+                    <Cell>
+                        <RoomNo>101</RoomNo>
+                        <PrimaryKey>100</PrimaryKey>
+                        <ForeignKey>100</ForeignKey>
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                    <Cell>
+                        <RoomNo>102</RoomNo>
+                        <PrimaryKey>101</PrimaryKey>
+                        <ForeignKey>101</ForeignKey>
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                    <Cell>
+                        <RoomNo>103</RoomNo>
+                        <PrimaryKey>102</PrimaryKey>
+                        <ForeignKey>102</ForeignKey>
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                    <Cell>
+                        <RoomNo>104</RoomNo>
+                        <PrimaryKey>103</PrimaryKey>
+                        <ForeignKey>103</ForeignKey>
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>1</DataPoint>
+                </Switch>
+                <Speed>
+                    <DataPoint>5</DataPoint>
+                </Speed>
+                <Mode>
+                    <DataPoint>4</DataPoint>
+                </Mode>
+                <Temp>
+                    <DataPoint>2</DataPoint>
+                </Temp>
+                <EnvTemp>
+                    <DataPoint>3</DataPoint>
+                </EnvTemp>
+
+                <!--Modbus device id-->
+                <DeviceAddr>1</DeviceAddr>
+                <!--串口号,当前硬件支持1,2,3-->
+                <Port>1</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!--n(无) o(奇) e(偶)-->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!-- 设备主动上报数据:Y -->
+                <FullDuplex>N</FullDuplex>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+        </AirCondition>
+
+        <Ventilation>
+            <Cell>
+                <SharedLibrary>Mbus_Vent_Dpurat.so</SharedLibrary>
+                <ProductID>ityiaeb3uzapmahe</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>1</RoomNo>
+                        <PrimaryKey>101</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <!-- ZIGBEE/MODBUS/KNX/RF433 -->
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>39</DataPoint>
+                </Switch>
+                <Speed>
+                    <DataPoint>102</DataPoint>
+                </Speed>
+                <!-- Modbus device addr -->
+                <DeviceAddr>2</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>3</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+        </Ventilation>
+        <FloorHeating>
+            <Cell>
+                <SharedLibrary>Mbus_Heat_Honeywell.so</SharedLibrary>
+                <ProductID>gkgvfx8davsnyejo</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>1</RoomNo>
+                        <PrimaryKey>101</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>1</DataPoint>
+                </Switch>
+                <Temp>
+                    <DataPoint>2</DataPoint>
+                </Temp>
+                <EnvTemp>
+                    <DataPoint>3</DataPoint>
+                </EnvTemp>
+                <!-- Modbus device addr -->
+                <DeviceAddr>3</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>3</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+            <Cell>
+                <SharedLibrary>Mbus_Heat_Honeywell.so</SharedLibrary>
+                <ProductID>gkgvfx8davsnyejo</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>2</RoomNo>
+                        <PrimaryKey>102</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <!-- ZIGBEE/MODBUS/KNX/RF433 -->
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>1</DataPoint>
+                </Switch>
+                <Temp>
+                    <DataPoint>2</DataPoint>
+                </Temp>
+                <EnvTemp>
+                    <DataPoint>3</DataPoint>
+                </EnvTemp>
+                <!-- Modbus device addr -->
+                <DeviceAddr>4</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>3</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+            <Cell>
+                <SharedLibrary>Mbus_Heat_Honeywell.so</SharedLibrary>
+                <ProductID>gkgvfx8davsnyejo</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>3</RoomNo>
+                        <PrimaryKey>103</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <!-- ZIGBEE/MODBUS/KNX/RF433 -->
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>1</DataPoint>
+                </Switch>
+                <Temp>
+                    <DataPoint>2</DataPoint>
+                </Temp>
+                <EnvTemp>
+                    <DataPoint>3</DataPoint>
+                </EnvTemp>
+                <!-- Modbus device addr -->
+                <DeviceAddr>5</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>3</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+            <Cell>
+                <SharedLibrary>Mbus_Heat_Honeywell.so</SharedLibrary>
+                <ProductID>gkgvfx8davsnyejo</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>4</RoomNo>
+                        <PrimaryKey>104</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <!-- ZIGBEE/MODBUS/KNX/RF433 -->
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>1</DataPoint>
+                </Switch>
+                <Temp>
+                    <DataPoint>2</DataPoint>
+                </Temp>
+                <EnvTemp>
+                    <DataPoint>3</DataPoint>
+                </EnvTemp>
+                <!-- Modbus device addr -->
+                <DeviceAddr>6</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>3</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+        </FloorHeating>
+        <Panel>
+            <Cell>
+                <!-- only one-key switch is support -->
+                <SharedLibrary>Mbus_Heat_Honeywell.so</SharedLibrary>
+                <ProductID>ilpuchpli94eigt7</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>4</RoomNo>
+                        <PrimaryKey>104</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <!-- ZIGBEE/MODBUS/KNX/RF433 -->
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Switch>
+                    <DataPoint>1</DataPoint>
+                </Switch>
+                <!-- Modbus device addr -->
+                <DeviceAddr>2</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>1</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+        </Panel>
+        <AQI>
+            <Cell>
+                <SharedLibrary>Mbus_AQI_Ohosure.so</SharedLibrary>
+                <ProductID>mqwefweal5pkfypv</ProductID>
+                <Item>
+                    <Cell>
+                        <RoomNo>2</RoomNo>
+                        <PrimaryKey>102</PrimaryKey>
+                        <ForeignKey>0</ForeignKey>
+                        <!-- ZIGBEE/MODBUS/KNX/RF433 -->
+                        <ForeignType>KNX</ForeignType>
+                    </Cell>
+                </Item>
+                <Temp>
+                    <DataPoint>8</DataPoint>
+                </Temp>
+                <Humi>
+                    <DataPoint>9</DataPoint>
+                </Humi>
+                <PM25>
+                    <DataPoint>33</DataPoint>
+                </PM25>
+                <CO2>
+                    <DataPoint>37</DataPoint>
+                </CO2>
+                <!-- Modbus device addr -->
+                <DeviceAddr>2</DeviceAddr>
+                <!-- Up to three serial ports are supported -->
+                <Port>2</Port>
+                <Baudrate>9600</Baudrate>
+                <Databit>8</Databit>
+                <!-- n(无) o(奇) e(偶) -->
+                <Parity>n</Parity>
+                <Stopbit>1</Stopbit>
+                <!-- RS485控制命令：应答Y，不应答N -->
+                <Feedback>Y</Feedback>
+                <!--数据应答延时，单位ms-->
+                <Delay>50</Delay>
+            </Cell>
+        </AQI>
+    </Modbus>
+
+</Device>

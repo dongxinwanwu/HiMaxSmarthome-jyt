@@ -1,0 +1,44 @@
+[Unit]
+Description=Smarthome gateway application
+After=network.target knxd.service
+Wants=knxd.service
+
+[Service]
+ExecStart=/usr/bin/your_real_app          # 你的真实二进制路径
+Restart=always
+RestartSec=5
+
+# ============ 这里开始是“笼子”重点 ============
+
+# 1. 文件系统彻底只读 + 关键目录不可访问
+ProtectSystem=strict          # /usr, /boot, /efi 只读，/etc 只读
+ReadWritePaths=/data /var/log/your_app   # 只允许你指定的目录可写
+ProtectHome=yes               # 禁止访问 /home, /root, /run/user
+
+# 2. 进程连自己的二进制都读不到（黑客cat都cat不了！）
+ProtectSystem=strict
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+MemoryDenyWriteExecute=yes    # 禁止运行时生成可执行代码（防JIT、反调试）
+
+# 3. 剥夺几乎所有特权
+NoNewPrivileges=yes           # 禁止进程再提权（就算有suid也无效）
+CapabilityBoundingSet=~      # 先清空所有能力，再只给必须的
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_NET_RAW CAP_SYS_NICE  # 只保留你真正需要的
+
+# 4. 私有临时目录 + 隔离挂载命名空间
+PrivateTmp=yes
+PrivateMounts=yes
+
+# 5. 最狠一击：禁止被ptrace调试（gdb/strace直接失败）
+RestrictSUIDSGID=yes
+SystemCallFilter=@debug        # 禁止 ptrace 等调试调用（systemd 220+支持）
+# 或者更彻底用 seccomp（后面我们再加）
+
+# 6. 运行在专用用户，彻底脱离root
+User=appuser
+Group=appgroup
+
+[Install]
+WantedBy=multi-user.target

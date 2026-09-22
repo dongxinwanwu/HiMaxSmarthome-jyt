@@ -1,0 +1,16 @@
+中海823/759：
+KNX_Aircondition_Sdk_H8C09
+KNX_FloorHeating_Sdk_H8C09
+KNX_Ventilation_Sdk_H8C09
+
+中海673：
+KNX_Aircondition_STEC
+KNX_FloorHeating_STEC
+KNX_Ventilation_STEC
+
+无锡京投：
+knx_vent_panel
+knx_acd_panel
+knx_heat_panel
+
+

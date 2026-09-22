@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Device xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com schema.xsd" -->
+<Device>
+    <AirCondition>
+        <DevType>Modbus</DevType>
+        <Plugin>AirCondition-DaiKin-DTA116A621.so</Plugin>
+        <ProductID>kvwudpp7</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="100" ForeignKey="100" ForeignType="KNX" AcdNo="1"/>
+
+        <Switch Point="1"/>
+        <Temp Point="2"/>
+        <EnvTemp Point="3"/>
+        <Mode Point="4"/>
+        <Speed Point="5"/>
+
+        <Param address="1" Port="1" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>Modbus</DevType>
+        <Plugin>AirCondition-DaiKin-DTA116A621.so</Plugin>
+        <ProductID>kvwudpp7</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="101" ForeignKey="101" ForeignType="KNX" AcdNo="2"/>
+
+        <Switch Point="1"/>
+        <Temp Point="2"/>
+        <EnvTemp Point="3"/>
+        <Mode Point="4"/>
+        <Speed Point="5"/>
+
+        <Param address="1" Port="1" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>Modbus</DevType>
+        <Plugin>AirCondition-DaiKin-DTA116A621.so</Plugin>
+        <ProductID>kvwudpp7</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="102" ForeignKey="102" ForeignType="KNX" AcdNo="3"/>
+
+        <Switch Point="1"/>
+        <Temp Point="2"/>
+        <EnvTemp Point="3"/>
+        <Mode Point="4"/>
+        <Speed Point="5"/>
+
+        <Param address="1" Port="1" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>Modbus</DevType>
+        <Plugin>AirCondition-DaiKin-DTA116A621.so</Plugin>
+        <ProductID>kvwudpp7</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="103" ForeignKey="103" ForeignType="KNX" AcdNo="4"/>
+
+        <Switch Point="1"/>
+        <Temp Point="2"/>
+        <EnvTemp Point="3"/>
+        <Mode Point="4"/>
+        <Speed Point="5"/>
+
+        <Param address="1" Port="1" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>Modbus</DevType>
+        <Plugin>AirCondition-DaiKin-DTA116A621.so</Plugin>
+        <ProductID>kvwudpp7</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="104" ForeignKey="104" ForeignType="KNX" AcdNo="5"/>
+
+        <Switch Point="1"/>
+        <Temp Point="2"/>
+        <EnvTemp Point="3"/>
+        <Mode Point="4"/>
+        <Speed Point="5"/>
+
+        <Param address="1" Port="1" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>KNX</DevType>
+        <Plugin>knx_acd_panel.so</Plugin>
+        <ProductID>cl1ho1dimtvada4h</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="100" />
+
+        <Switch Ctrl="0/1/52" Status="0/1/52" Point="1"/>
+        <Temp Ctrl="0/1/49" Status="0/1/48" Point="2"/>
+        <EnvTemp Status="0/1/45" Point="3"/>
+        <Mode Ctrl="0/1/51" Status="0/1/50" Point="4"/>
+        <Speed Ctrl="0/1/47" Status="0/1/46" Point="5"/>
+
+        <Param address="1.5.2"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>KNX</DevType>
+        <Plugin>knx_acd_panel.so</Plugin>
+        <ProductID>cl1ho1dimtvada4h</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="101" />
+
+        <Switch Ctrl="0/1/52" Status="0/1/52" Point="1"/>
+        <Temp Ctrl="0/1/49" Status="0/1/48" Point="2"/>
+        <EnvTemp Status="0/1/45" Point="3"/>
+        <Mode Ctrl="0/1/51" Status="0/1/50" Point="4"/>
+        <Speed Ctrl="0/1/47" Status="0/1/46" Point="5"/>
+
+        <Param address="1.5.3"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>KNX</DevType>
+        <Plugin>knx_acd_panel.so</Plugin>
+        <ProductID>cl1ho1dimtvada4h</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="102" />
+
+        <Switch Ctrl="0/1/52" Status="0/1/52" Point="1"/>
+        <Temp Ctrl="0/1/49" Status="0/1/48" Point="2"/>
+        <EnvTemp Status="0/1/45" Point="3"/>
+        <Mode Ctrl="0/1/51" Status="0/1/50" Point="4"/>
+        <Speed Ctrl="0/1/47" Status="0/1/46" Point="5"/>
+
+        <Param address="1.5.4"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>KNX</DevType>
+        <Plugin>knx_acd_panel.so</Plugin>
+        <ProductID>cl1ho1dimtvada4h</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="103" />
+
+        <Switch Ctrl="0/1/52" Status="0/1/52" Point="1"/>
+        <Temp Ctrl="0/1/49" Status="0/1/48" Point="2"/>
+        <EnvTemp Status="0/1/45" Point="3"/>
+        <Mode Ctrl="0/1/51" Status="0/1/50" Point="4"/>
+        <Speed Ctrl="0/1/47" Status="0/1/46" Point="5"/>
+
+        <Param address="1.5.5"/>
+    </AirCondition>
+
+    <AirCondition>
+        <DevType>KNX</DevType>
+        <Plugin>knx_acd_panel.so</Plugin>
+        <ProductID>cl1ho1dimtvada4h</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="104" />
+
+        <Switch Ctrl="0/1/52" Status="0/1/52" Point="1"/>
+        <Temp Ctrl="0/1/49" Status="0/1/48" Point="2"/>
+        <EnvTemp Status="0/1/45" Point="3"/>
+        <Mode Ctrl="0/1/51" Status="0/1/50" Point="4"/>
+        <Speed Ctrl="0/1/47" Status="0/1/46" Point="5"/>
+
+        <Param address="1.5.6"/>
+    </AirCondition>
+
+    <Ventilation>
+        <DevType>Modbus</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="100" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Point="39"/>
+        <Speed Point="101"/>
+
+        <Param address="1" Port="2" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>Modbus</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="101" ForeignKey="101" ForeignType="KNX"/>
+
+        <Switch Point="39"/>
+        <Speed Point="101"/>
+
+        <Param address="1" Port="2" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>Modbus</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="102" ForeignKey="102" ForeignType="KNX"/>
+
+        <Switch Point="39"/>
+        <Speed Point="101"/>
+
+        <Param address="1" Port="2" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>Modbus</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="103" ForeignKey="103" ForeignType="KNX"/>
+
+        <Switch Point="39"/>
+        <Speed Point="101"/>
+
+        <Param address="1" Port="2" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>Modbus</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Master</Linkage>
+        <Key PrimaryKey="104" ForeignKey="104" ForeignType="KNX"/>
+
+        <Switch Point="39"/>
+        <Speed Point="101"/>
+
+        <Param address="1" Port="2" BaudRate="9600" Parity="0" StopBits="1" DataBits="8"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>KNX</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="100"/>
+
+        <Switch Ctrl="0/1/59" Status="0/1/59" Point="39"/>
+        <Speed Ctrl="0/1/58" Status="0/1/57" Point="101"/>
+
+        <Param address="1.5.2"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>KNX</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="101"/>
+
+        <Switch Ctrl="0/1/59" Status="0/1/59" Point="39"/>
+        <Speed Ctrl="0/1/58" Status="0/1/57" Point="101"/>
+
+        <Param address="1.5.2"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>KNX</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="102"/>
+
+        <Switch Ctrl="0/1/59" Status="0/1/59" Point="39"/>
+        <Speed Ctrl="0/1/58" Status="0/1/57" Point="101"/>
+
+        <Param address="1.5.2"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>KNX</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="103"/>
+
+        <Switch Ctrl="0/1/59" Status="0/1/59" Point="39"/>
+        <Speed Ctrl="0/1/58" Status="0/1/57" Point="101"/>
+
+        <Param address="1.5.2"/>
+    </Ventilation>
+
+    <Ventilation>
+        <DevType>KNX</DevType>
+        <Plugin>Modbus_Ventilation_TuoLi_TLCAA301R.so</Plugin>
+        <ProductID>qwfpaf5i</ProductID>
+        <Linkage>Slave</Linkage>
+        <Key PrimaryKey="104"/>
+
+        <Switch Ctrl="0/1/59" Status="0/1/59" Point="39"/>
+        <Speed Ctrl="0/1/58" Status="0/1/57" Point="101"/>
+
+        <Param address="1.5.2"/>
+    </Ventilation>
+
+    <FloorHeating>
+        <DevType>KNX</DevType>
+        <Plugin>knx_heat_panel.so</Plugin>
+        <ProductID>gkgvfx8davsnyejo</ProductID>
+        <Key PrimaryKey="100" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Ctrl="0/1/55" Status="0/1/55" Point="1"/>
+        <Temp Ctrl="0/1/54" Status="0/1/5" Point="2"/>
+        <EnvTemp Status="0/1/45" Point="3"/>
+
+        <Param address="1.5.2"/>
+    </FloorHeating>
+
+    <Panel Channels="5">
+        <DevType>KNX</DevType>
+        <ProductID>wafjxnaqumnaxry8</ProductID>
+        <Key PrimaryKey="100" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Ctrl="4/0/13" Status="2/0/13" Point="1"/>
+        <Switch Ctrl="4/0/15" Status="2/0/15" Point="2"/>
+        <Switch Ctrl="4/0/16" Status="2/0/16" Point="3"/>
+        <Switch Ctrl="4/0/17" Status="2/0/17" Point="4"/>
+        <Switch Ctrl="4/0/18" Status="2/0/18" Point="5"/>
+
+        <Param address="1.5.11"/>
+    </Panel>
+
+    <Panel Channels="4">
+        <DevType>KNX</DevType>
+        <ProductID>kauthexfkhfh2zno</ProductID>
+        <Key PrimaryKey="101" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="1"/>
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="2"/>
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="3"/>
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="4"/>
+
+        <Param address="1.1.1"/>
+    </Panel>
+
+    <Panel Channels="3">
+        <DevType>KNX</DevType>
+        <ProductID>ycsntf5vjxh02ugs</ProductID>
+        <Key PrimaryKey="102" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="1"/>
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="2"/>
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="3"/>
+
+        <Param address="1.1.1"/>
+    </Panel>
+
+    <Panel Channels="2">
+        <DevType>KNX</DevType>
+        <ProductID>nkzo2luzanm1vacf</ProductID>
+        <Key PrimaryKey="103" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="1"/>
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="2"/>
+
+        <Param address="1.1.1"/>
+    </Panel>
+
+    <Panel Channels="1">
+        <DevType>KNX</DevType>
+        <ProductID>ilpuchpli94eigt7</ProductID>
+        <Key PrimaryKey="104" ForeignKey="100" ForeignType="KNX"/>
+
+        <Switch Ctrl="1/1/1" Status="1/0/1" Point="1"/>
+
+        <Param address="1.1.1"/>
+    </Panel>
+
+    <DI Channel="1">
+        <!--水浸检测-->
+        <ProductID>1qyjgsx6nntxfqja</ProductID>
+        <Key PrimaryKey="100" />
+
+        <Alarm Trigger="low" Point="1"/>
+    </DI>
+
+    <DI Channel="2">
+        <!--烟雾检测-->
+        <ProductID>zw9j8wgdg8mmpz59</ProductID>
+        <Key PrimaryKey="101" />
+
+        <Alarm Trigger="low" Point="1"/>
+    </DI>
+</Device>
