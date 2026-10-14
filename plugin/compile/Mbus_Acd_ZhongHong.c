@@ -7,13 +7,13 @@
 #include "utils.h"
 
 /*
- * 产品ID: iqkpbovlhaxkekh1
+ * 产品ID: 4a7adltx2f8glk9f
 DP    功能点名称        标识符            传输类型    数据类型    功能点属性
 1     开关            switch            rw        bool
 2     温度设置         temp_set          rw        value     数值范围: 16-30, 间距: 1, 倍数: 0, 单位:
-3     当前温度         temp_current      ro        value     数值范围: -20-55, 间距: 1, 倍数: 0, 单位:
+3     当前温度         temp_current      ro        value     数值范围: -90-500, 间距: 1, 倍数: 1, 单位:
 4     工作模式         mode              rw        enum      枚举值: cold, hot, wet, wind
-5     风速            fan_speed_enum    rw        enum      枚举值: auto, high, middle, low
+5     风速            fan_speed_enum    rw        enum      枚举值: auto, low, middle, high
 */
 
 /*
@@ -119,16 +119,21 @@ Msg_t *build(uint8_t devId, uint16_t regAddr, uint16_t groupAddr, const void *pv
             break;
         case 5: /* Speed */
             /*
-             * tuya : auto, high, middle, low
+             * tuya : auto, low, middle, high
              * zhonghong: auto(0),high(1),middle(2),low(4)
              * */
             *((uint8_t *) (pMsg->pBuf + 1)) = WRITE_CMD_SPEED;
             *((uint8_t *) (pMsg->pBuf + 3)) = 1;
             *((uint16_t *) (pMsg->pBuf + 4)) = htons (regAddr);
-            if (pObj->value.dp_enum == 3) {
+
+            if (pObj->value.dp_enum == 0) {
+                *((uint8_t *) (pMsg->pBuf + 2)) = 0;
+            } else if (pObj->value.dp_enum == 1) {
                 *((uint8_t *) (pMsg->pBuf + 2)) = 4;
-            } else {
-                *((uint8_t *) (pMsg->pBuf + 2)) = pObj->value.dp_enum;
+            } else if (pObj->value.dp_enum == 2) {
+                *((uint8_t *) (pMsg->pBuf + 2)) = 2;
+            } else if (pObj->value.dp_enum == 3) {
+                *((uint8_t *) (pMsg->pBuf + 2)) = 1;
             }
 
             break;
@@ -227,21 +232,21 @@ MbusObj_t **parse(uint8_t devId, uint16_t regAddr, const void *pvMbusNode, const
             zlog_error(pLogCat, COLOR_RED "[mbus Plugin] acd mode not support.\n" COLOR_CLEAR);
         }
         /*
-         * tuya : auto, high, middle, low
+         * tuya : auto, low, middle, high
          * zhonghong: auto(0),high(1),middle(2),low(4)
          * */
         char *pSpeedTag = NULL;
         if (pos[9] == 4) {
-            ppMbusObj[SPEED]->value = 3;
+            ppMbusObj[SPEED]->value = 1;
             pSpeedTag = (char *)"low";
         } else if (pos[9] == 2) {
-            ppMbusObj[SPEED]->value = pos[9];
+            ppMbusObj[SPEED]->value = 2;
             pSpeedTag = (char *)"middle";
         } else if (pos[9] == 1) {
-            ppMbusObj[SPEED]->value = pos[9];
+            ppMbusObj[SPEED]->value = 3;
             pSpeedTag = (char *)"high";
         } else if (pos[9] == 0) {
-            ppMbusObj[SPEED]->value = pos[9];
+            ppMbusObj[SPEED]->value = 0;
             pSpeedTag = (char *)"auto";
         } else {
             zlog_error(pLogCat, COLOR_RED "[mbus Plugin] acd speed not support.\n" COLOR_CLEAR);
