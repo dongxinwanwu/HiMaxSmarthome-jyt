@@ -302,6 +302,7 @@ int KNX_ParsePacket (const char *pBuf, KnxDataType_t *pKnxData) {
     return 0;
 }
 
+//空调KNX命令，如果作为执行器则进行云端状态同步
 int Knx_AirconditionCtrl (KnxWriteType_t *pKnxData) {
     if (!pKnxData) {
         logErr ("Knx_AirconditionCtrl invalid param");
@@ -936,6 +937,7 @@ int Knx_CurtainCtrl (KnxWriteType_t *pKnxData) {
     return ret;
 }
 
+//knx总线监测,空调状态同步控制485空调或者状态直接上报
 int Knx_AcdReport (KnxDataType_t *pData) {
     if (!pData) {
         logErr ("Knx_Aircondition Report invalid param");
@@ -1009,6 +1011,8 @@ int Knx_AcdReport (KnxDataType_t *pData) {
 
         logTrc ("[knx acd report] cloudPoint=%d, value=%d", Obj.dpid, Obj.value.dp_value);
 
+        //KNX执行器:直接上报云端
+        //KNX控制器:将数据同步到485总线或者上报云端(无需转发指令，直接同步云端,如直接引用KNX温控面板的环境温度参数)
         if (pKnx->element.bMaster) {
             if (g_bActive) {
                 ret = tuya_user_iot_report_obj_dp (pAC->base.element.pPrimaryKey, &Obj, 1);
@@ -1471,6 +1475,7 @@ int Knx_CurtainReport (KnxDataType_t *pData) {
     return ret;
 }
 
+//KNX总线监测，将数据写入queue
 void KNX_BusMonitorEntry (void *param) {
     if (!param) {
         logErr ("KNX_BusMonitorEntry invalid param");
@@ -1561,7 +1566,9 @@ void KNX_BusMonitorEntry (void *param) {
     logErr ("KNX BusMonitor Thread crash!");
     queue_put (threadDog[0].pQueue, (void *) &threadDog[0]);
 }
-
+//KNX总线数据处理
+//KNX执行器同步云端
+//KNX控制器同步指令485控制
 void KNX_DevMonitorEntry (void *param) {
     if (!param) {
         logErr ("KNX_DevMonitorEntry invalid param");
@@ -1602,6 +1609,7 @@ void KNX_DevMonitorEntry (void *param) {
     queue_put (threadDog[1].pQueue, (void *) &threadDog[1]);
 }
 
+//控制源：云端（App端、云端场景等）指令、KNX面板
 void KNX_DevWriteEntry (void *param) {
     if (!param) {
         logErr ("KNX_DevWriteEntry invalid param");
@@ -1645,7 +1653,7 @@ void KNX_DevWriteEntry (void *param) {
     logErr ("KNX_DevWriteEntry Thread crash!");
     queue_put (threadDog[2].pQueue, (void *) &threadDog[2]);
 }
-
+//云端指令或者485状态同步写入队列
 int KnxGroupWrite (const char *pDevId, const TY_OBJ_DP_S *pObj) {
     if (!pDevId || !pObj) {
         logErr ("KnxGroupWrite invalid param");
@@ -2036,6 +2044,7 @@ int Knx_RequestHB (const char *pDevId) {
     if (pKnx->bOnlineCheck == false) {
         tuya_user_iot_misc_dev_hb_fresh (pKnx->element.pPrimaryKey);
         logTrc ("knx %s device not support online check!", pKnx->element.pPrimaryKey);
+        return 0;
     }
 
     if (pKnx->hbIgnore++ < 5) {
@@ -2219,9 +2228,13 @@ int KnxInit (threadpool hKnxThpool) {
     threadDog[0].hThpool = hKnxThpool;
 
     thpool_add_work (hKnxThpool, ThreadDogEntry, pDogQueue);
+    //KNX总线监测，将数据写入queue
     thpool_add_work (hKnxThpool, KNX_BusMonitorEntry, pMonitorQueue);
+    //从队列获取数据处理
     thpool_add_work (hKnxThpool, KNX_DevMonitorEntry, pMonitorQueue);
+
     thpool_add_work (hKnxThpool, KNX_DevDebounce, pMonitorQueue);
+    //云端指令或者485转发指令，写入队列
     thpool_add_work (hKnxThpool, KNX_DevWriteEntry, pWriteQueue);
     //    thpool_add_work(hKnxThpool, KNX_DevStateSync, pHeartbeatQueue);
     thpool_add_work (hKnxThpool, KNX_DevHealth, pHeartbeatQueue);
