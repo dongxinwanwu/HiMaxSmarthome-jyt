@@ -335,6 +335,7 @@ static int _iot_get_product_key_cb (char *pk, int pk_size) {
     return 0;
 }
 
+//网关激活状态，激活、未激活,只有在激活时，才会返回
 static int _gw_active_status_changed_cb (ty_gw_status_t status) {
     zlog_info (pLogCat, "gateway %s", status ? "active" : "inactive");
     if (status == TY_GW_STATUS_REGISTERED) {
@@ -351,6 +352,7 @@ static int _gw_active_status_changed_cb (ty_gw_status_t status) {
         // system ("rm -f " GW_ACTIVE_PATH);
         // system ("rwdisk -w 0x200E0 ------");
 
+        //网关被删除了，因此需要将所有子设备全部解除绑定
         void *iter = NULL;
         DEV_DESC_IF_S *dev_if = tuya_user_iot_misc_dev_traversal (&iter);
         while (dev_if) {
@@ -367,6 +369,7 @@ static int _gw_active_status_changed_cb (ty_gw_status_t status) {
     return 0;
 }
 
+//网关状态，在线、离线,设备断电、断网等恢复后，都会返回该状态
 static int _gw_online_status_changed_cb (bool online) {
     if (online) {
         system ("echo heartbeat > /sys/class/leds/chip-heartbeat/trigger");
@@ -538,6 +541,7 @@ static int _dev_raw_cmd_cb (const ty_raw_cmd_s *dp) {
     return 0;
 }
 
+//子设备添加
 static void _misc_dev_add_cb (bool permit, uint32_t timeout) {
     if (permit) {
         zlog_info (pLogCat, "add misc device, timeout=%u", timeout);
@@ -551,6 +555,7 @@ static void _misc_dev_add_cb (bool permit, uint32_t timeout) {
     }
 }
 
+//App端解绑，网关收到云端的删除通知，
 static void _misc_dev_del_cb (const char *dev_id) {
     int ret = 0;
     DEV_DESC_IF_S *dev_if = NULL;
@@ -585,6 +590,7 @@ static void _misc_dev_del_cb (const char *dev_id) {
     }
 }
 
+//云端绑定消息通知，根据id检查链表中是否存在，存在则上报心跳，不存在则打印错误日志
 static void _misc_dev_bind_ifm_cb (const char *dev_id, int result) {
     int ret = 0;
     DEV_DESC_IF_S *dev_if = NULL;
@@ -602,6 +608,7 @@ static void _misc_dev_bind_ifm_cb (const char *dev_id, int result) {
     logDbg ( COLOR_RED "bind dev(%s -- %s) to gateway success" COLOR_CLEAR, dev_id, dev_if->id);
     // bind dev(02c7ecdad9252103 -- 02c7ecdad9252103) to gateway success
 
+    //这个队列的作用？KNX设备专用
     if (queue_put (pBindPosQueue, (void *) dev_if) != 0) {
         logErr ( "put position queue failed!");
     }
@@ -665,6 +672,7 @@ static void _misc_dev_upgrade_cb (const char *dev_id, const char *img) {
     }
 }
 
+//App端解绑并且清除数据，网关收到云端的删除通知
 static void _misc_dev_reset_cb (const char *dev_id) {
     int ret = 0;
     DEV_DESC_IF_S *dev_if = NULL;
@@ -689,6 +697,7 @@ static void _misc_dev_reset_cb (const char *dev_id) {
     }
 }
 
+//云端主动查询,网关主动查询子设备状态
 static void _misc_dev_hb_cb (const char *dev_id) {
     DEV_DESC_IF_S *dev_if = NULL;
     int ret = 0;
@@ -1004,6 +1013,7 @@ void __attribute__ ((weak)) test_tuya_user_iot_channel_get (void) {
     log_debug ("channel: %d", channel);
 }
 
+//非zigbee设备心跳配置
 void misc_heartbeat_cfg (void) {
     DEV_DESC_IF_S *dev_if = NULL;
     VOID *iter = NULL;
@@ -1300,6 +1310,7 @@ int main (int argc, char *argv[]) {
         gw_attr.is_engr = 1;
     }
 
+    //网关基础信息回调注册,包含网关uuid、authkey、product_key获取，网关日志获取，网关重启、复位、升级，网关激活状态变化，网关在线状态变化
     ty_gw_infra_cbs_s gw_infra_cbs = {
         .get_uuid_authkey_cb = _iot_get_uuid_authkey_cb,
         .get_product_key_cb = _iot_get_product_key_cb,
@@ -1311,11 +1322,19 @@ int main (int argc, char *argv[]) {
         .gw_online_status_changed_cb = _gw_online_status_changed_cb,
     };
 
+    //设备指令回调注册,包含标准指令和原始指令
     ty_dev_cmd_cbs_s dev_cmd_cbs = {
         .dev_obj_cmd_cb = _dev_obj_cmd_cb,
         .dev_raw_cmd_cb = _dev_raw_cmd_cb,
     };
 
+    //子设备操作的所有回调函数
+    // 1.子设备添加回调函数
+    // 2.子设备删除回调函数
+    // 3.子设备绑定回调函数
+    // 4.子设备升级回调函数
+    // 5.子设备复位回调函数
+    // 6.子设备心跳回调函数
     ty_misc_dev_cbs_s misc_dev_cbs = {
         .misc_dev_add_cb = _misc_dev_add_cb,
         .misc_dev_del_cb = _misc_dev_del_cb,
@@ -1803,11 +1822,14 @@ int LoadKnxPlugin (list_t *pList) {
     return 0;
 }
 
+//设备绑定与解绑方案
+//依次检查设备链表，主设备(执行器)可以云端注册，控制器不可注册
 int Modbus_DevBind (list_t *pLst, bool permit) {
     if (!pLst) {
         logErr ( "Modbus_DevBind invalid parameter");
         return -1;
     }
+    logDbg ( "Modbus_DevBind!");
     listIter iter;
     listNode *pNode;
     listRewind (pLst, &iter);
@@ -1824,6 +1846,7 @@ int Modbus_DevBind (list_t *pLst, bool permit) {
             continue;
         }
         DEV_DESC_IF_S *dev_if = tuya_user_iot_misc_dev_desc_get ((*ppBase)->element.pPrimaryKey);
+        //没有查找到设备描述，则说明设备未绑定，进行绑定操作
         if (!dev_if) {
             if (permit) {
                 int ret = tuya_user_iot_misc_dev_bind (DEV_TP_485, 0x2222, (*ppBase)->element.pPrimaryKey, (*ppBase)->element.pProductId, "1.0.0");
@@ -1843,9 +1866,10 @@ int Modbus_DevBind (list_t *pLst, bool permit) {
 
 int Modbus_DevUnbind (list_t *pLst, const char *pDevId) {
     if (!pLst) {
-        logErr ( "Knx_DevUnbind: pLst==NULL\n");
+        logErr ( "Modbus_DevUnbind: pLst==NULL\n");
         return -1;
     }
+    logDbg ( "Modbus_DevUnbind!");
     (void) pDevId;
     listIter iter;
     listNode *pNode;
@@ -1855,7 +1879,8 @@ int Modbus_DevUnbind (list_t *pLst, const char *pDevId) {
         MbusBase_t **ppBase = (MbusBase_t **) pNode->value;
         if (!(*ppBase)->element.bMaster) continue;
         DEV_DESC_IF_S *dev_if = tuya_user_iot_misc_dev_desc_get ((*ppBase)->element.pPrimaryKey);
-        if (!dev_if) {
+        //查找到设备描述接口，则说明设备注册成功，可以进行解除绑定操作
+        if (dev_if) {
             int ret = tuya_user_iot_misc_dev_unbind ((*ppBase)->element.pPrimaryKey);
             if (ret != OPRT_OK) {
                 logErr ( "knx %s unbind fail! %d", (*ppBase)->element.szName, ret);
@@ -1877,7 +1902,7 @@ int Knx_DevBind (list_t *pLst, bool permit) {
         logDbg ( "Knx_DevBind permit join");
         return 0;
     }
-
+    logDbg ( "Knx_DevBind!");
     listIter iter;
     listNode *pNode;
 
@@ -1891,12 +1916,13 @@ int Knx_DevBind (list_t *pLst, bool permit) {
         }
 
         DEV_DESC_IF_S *dev_if = tuya_user_iot_misc_dev_desc_get (pKnx->element.pPrimaryKey);
-        if (dev_if) continue;
-        if (tuya_user_iot_misc_dev_bind (DEV_TP_KNX, 0x2222, pKnx->element.pPrimaryKey, pKnx->element.pProductId, "1.0.0") != OPRT_OK) {
-            logErr ( "knx %s bind fail!", pKnx->element.szName);
-            continue;
+        if (!dev_if) {
+            if (tuya_user_iot_misc_dev_bind (DEV_TP_KNX, 0x2222, pKnx->element.pPrimaryKey, pKnx->element.pProductId, "1.0.0") != OPRT_OK) {
+                logErr ( "knx %s bind fail!", pKnx->element.szName);
+                continue;
+            }
+            logDbg ( "knx %s bind sucess! device id=%s, product id=%s", pKnx->element.szName, pKnx->element.pPrimaryKey, pKnx->element.pProductId);
         }
-        logDbg ( "knx %s bind sucess! device id=%s, product id=%s", pKnx->element.szName, pKnx->element.pPrimaryKey, pKnx->element.pProductId);
     }
 
     return 0;
@@ -1907,6 +1933,8 @@ int DIO_DevBind (list_t *pLst, bool permit) {
         logErr ( "DIO_DevBind invalid parameter");
         return -1;
     }
+    logDbg ( "DIO_DevBind!");
+
     listIter iter;
     listNode *pNode;
 
@@ -1923,10 +1951,10 @@ int DIO_DevBind (list_t *pLst, bool permit) {
                 int ret = tuya_user_iot_misc_dev_bind (DEV_TP_USR1, 0x2222, pDi->element.pPrimaryKey,
                                                        pDi->element.pProductId, "1.0.0");
                 if (ret != OPRT_OK) {
-                    logErr ( "%s%d bind fail! %d", pDi->element.szName, pDi->channel, ret);
+                    logErr ( "DIO %s%d bind fail! %d", pDi->element.szName, pDi->channel, ret);
                     continue;
                 }
-                logDbg ( "%s%d bind sucess! device id=%s, product id=%s",
+                logDbg ( "DIO %s%d bind sucess! device id=%s, product id=%s",
                             pDi->element.szName, pDi->channel, pDi->element.pPrimaryKey, pDi->element.pProductId);
             }
         } else {
@@ -1942,6 +1970,8 @@ int Knx_DevUnbind (list_t *pLst, const char *pDevId) {
         logErr ( "Knx_DevUnbind invalid parameter");
         return -1;
     }
+    logDbg ( "Knx_DevUnbind!");
+
     (void) pDevId;
     listIter iter;
     listNode *pNode;
@@ -1954,7 +1984,7 @@ int Knx_DevUnbind (list_t *pLst, const char *pDevId) {
         KnxBase_t *pKnx = (KnxBase_t *) pNode->value;
 
         DEV_DESC_IF_S *dev_if = tuya_user_iot_misc_dev_desc_get (pKnx->element.pPrimaryKey);
-        if (!dev_if) {
+        if (dev_if) {
             int ret = tuya_user_iot_misc_dev_unbind (pKnx->element.pPrimaryKey);
             if (ret != OPRT_OK) {
                 logErr ( "knx %s unbind fail! %d", pKnx->element.szName, ret);
@@ -1970,9 +2000,11 @@ int Knx_DevUnbind (list_t *pLst, const char *pDevId) {
 
 int DIO_DevUnbind (list_t *pLst, const char *pDevId) {
     if (!pLst) {
-        logErr ( "Knx_DevUnbind invalid parameter");
+        logErr ( "DIO_DevUnbind invalid parameter");
         return -1;
     }
+    logDbg ( "DIO_DevUnbind!");
+
     (void) pDevId;
     listIter iter;
     listNode *pNode;
@@ -1987,13 +2019,13 @@ int DIO_DevUnbind (list_t *pLst, const char *pDevId) {
         DiDev_t *pDi = (DiDev_t *) pNode->value;
 
         DEV_DESC_IF_S *dev_if = tuya_user_iot_misc_dev_desc_get (pDi->element.pPrimaryKey);
-        if (!dev_if) {
+        if (dev_if) {
             int ret = tuya_user_iot_misc_dev_unbind (pDi->element.pPrimaryKey);
             if (ret != OPRT_OK) {
-                logErr ( "knx %s unbind fail! %d", pDi->element.szName, ret);
+                logErr ( "DIO %s unbind fail! %d", pDi->element.szName, ret);
                 continue;
             }
-            logDbg ( "knx %s unbind sucess! device id=%s, product id=%s", pDi->element.szName,
+            logDbg ( "DIO %s unbind sucess! device id=%s, product id=%s", pDi->element.szName,
                         pDi->element.pPrimaryKey, pDi->element.pProductId);
         }
     }
@@ -2024,6 +2056,7 @@ void associateKnxDev (void) {
     }
 }
 
+//将Modbus设备与KNX设备进行关联，主要是将主设备与从设备进行绑定，便于后续的控制和数据交互。
 void associateModbusDev (void) {
     listIter iter;
     listNode *pModbusNode;
