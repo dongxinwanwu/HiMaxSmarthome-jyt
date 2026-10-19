@@ -78,8 +78,8 @@ void SerialRcvEntry (void *arg) {
         if (!pBase->bFullDuplex) {
             gettimeofday (&newtime, NULL);
             uint32_t timediff = (newtime.tv_sec - oldtime.tv_sec) * 1000 * 1000 + newtime.tv_usec - oldtime.tv_usec;
-            if (timediff >= 100000u + pBase->delay * 1000) { /* wait for 100ms + delay timeout */
-                logDbg ( "ttymxc%d recv timeout=%.03fms!", pBase->pSerial->pParam->port, timediff / 1000000.0);
+            if (timediff >= 500000u + pBase->delay * 1000) { /* wait for 100ms + delay timeout */
+                logDbg ( "ttymxc%d recv timeout=%.03fms!", pBase->pSerial->pParam->port, timediff / 1000.0);
                 break;
             }
         }
